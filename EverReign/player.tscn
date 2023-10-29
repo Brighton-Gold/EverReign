@@ -1,0 +1,127 @@
+[gd_scene load_steps=11 format=3 uid="uid://dokvy65d5u4b0"]
+
+[ext_resource type="Texture2D" uid="uid://bvuyvgmd17w0u" path="res://art/zelda-like-1_player_spritesheet.png" id="1_d7ekg"]
+
+[sub_resource type="GDScript" id="GDScript_vgqle"]
+script/source = "extends CharacterBody2D
+
+const SPEED = 70.0
+const JUMP_VELOCITY = -400.0
+
+var input_direction: get = _get_input_direction
+var sprite_direction = \"Down\": get =_get_sprite_direction
+@onready var sprite = $AnimatedSprite2D
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+
+func _physics_process(delta):
+	velocity = input_direction * SPEED
+	move_and_slide()
+	
+	set_animation(\"Walk\")
+	if velocity == Vector2.ZERO:
+		sprite.stop()
+		
+func set_animation(animation):
+	var direction = \"Side\" if sprite_direction in [\"Left\", \"Right\"] else sprite_direction
+	sprite.play(animation + direction)
+	sprite.flip_h = (sprite_direction == \"Left\")
+	
+func _get_input_direction():
+	var x = -int(Input.is_action_pressed(\"ui_left\")) + int(Input.is_action_pressed(\"ui_right\"))
+	var y = -int(Input.is_action_pressed(\"ui_up\")) + int(Input.is_action_pressed(\"ui_down\"))
+	input_direction = Vector2(x,y).normalized()
+	return input_direction
+
+func _get_sprite_direction():
+	match input_direction:
+		Vector2.LEFT:
+			sprite_direction = \"Left\"
+		Vector2.RIGHT:
+			sprite_direction = \"Right\"
+		Vector2.UP:
+			sprite_direction = \"Up\"
+		Vector2.DOWN:
+			sprite_direction = \"Down\"
+	return sprite_direction
+	
+
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rb6ho"]
+size = Vector2(12, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28wff"]
+atlas = ExtResource("1_d7ekg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg70v"]
+atlas = ExtResource("1_d7ekg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63kot"]
+atlas = ExtResource("1_d7ekg")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8f2q"]
+atlas = ExtResource("1_d7ekg")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axjvl"]
+atlas = ExtResource("1_d7ekg")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07a5g"]
+atlas = ExtResource("1_d7ekg")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5l8yw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28wff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg70v")
+}],
+"loop": true,
+"name": &"WalkDown",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63kot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8f2q")
+}],
+"loop": true,
+"name": &"WalkSide",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axjvl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07a5g")
+}],
+"loop": true,
+"name": &"WalkUp",
+"speed": 5.0
+}]
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(-1, -1)
+motion_mode = 1
+script = SubResource("GDScript_vgqle")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, -2.5)
+shape = SubResource("RectangleShape2D_rb6ho")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-8, -9)
+sprite_frames = SubResource("SpriteFrames_5l8yw")
+animation = &"WalkUp"
