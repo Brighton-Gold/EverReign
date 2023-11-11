@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7o35ekkqp28j"]
+[gd_scene load_steps=3 format=3 uid="uid://c7o35ekkqp28j"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_g1ukv"]
+[ext_resource type="PackedScene" uid="uid://fbfheyjdanqi" path="res://town.tscn" id="3_1dt8w"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_g1ukv")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+[node name="Town" parent="." instance=ExtResource("3_1dt8w")]
