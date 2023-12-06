@@ -6,7 +6,7 @@ Your character can move via arrow keys or WASD, whatever you perfer. In future, 
 # Personal Overview
 I am creating this game as a love letter to the games that have inspired me to learn about the world of computers, with a desire that other people can experience similair adventures I had growing up as well. To me, video games are an underappreciated art form, one I wish to learn more of and add my own personality to. This is something I hope to leave as a legacy to who I am today. 
 
-#Here are several YouTube demos showcasing the game. Watch it grow in real time!
+#### Here are several YouTube demos showcasing the game. Watch it grow in real time!
 
 Week One - https://youtu.be/wtw5nwqn1ZE
 
