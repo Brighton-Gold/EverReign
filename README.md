@@ -10,9 +10,9 @@ I am creating this game as a love letter to the games that have inspired me to l
 
 Week One - https://youtu.be/wtw5nwqn1ZE
 
-Week Four - overworld: https://youtu.be/Z4Q2s_k10P0 
+Week Four  -overworld: https://youtu.be/Z4Q2s_k10P0 
             
-            dungeon  : https://youtu.be/FAjU1vPC4HY
+           -dungeon  : https://youtu.be/FAjU1vPC4HY
 
 # Development Environment
 Currently Godot is being used to code my first game, "baby's first game engine" if you will. I am using GDScript as the main language, I have a few libraries I want to incorporate, but I'm going at a really slow pace so that might be awhile. 
